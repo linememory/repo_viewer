@@ -21,7 +21,7 @@ mixin _$AuthState {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function() authenticated,
-    required TResult Function(dynamic AuthFailure) failure,
+    required TResult Function(AuthFailure failure) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$AuthState {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? authenticated,
-    TResult Function(dynamic AuthFailure)? failure,
+    TResult Function(AuthFailure failure)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$AuthState {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? authenticated,
-    TResult Function(dynamic AuthFailure)? failure,
+    TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,7 +125,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function() authenticated,
-    required TResult Function(dynamic AuthFailure) failure,
+    required TResult Function(AuthFailure failure) failure,
   }) {
     return initial();
   }
@@ -136,7 +136,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? authenticated,
-    TResult Function(dynamic AuthFailure)? failure,
+    TResult Function(AuthFailure failure)? failure,
   }) {
     return initial?.call();
   }
@@ -147,7 +147,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? authenticated,
-    TResult Function(dynamic AuthFailure)? failure,
+    TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -242,7 +242,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function() authenticated,
-    required TResult Function(dynamic AuthFailure) failure,
+    required TResult Function(AuthFailure failure) failure,
   }) {
     return unauthenticated();
   }
@@ -253,7 +253,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? authenticated,
-    TResult Function(dynamic AuthFailure)? failure,
+    TResult Function(AuthFailure failure)? failure,
   }) {
     return unauthenticated?.call();
   }
@@ -264,7 +264,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? authenticated,
-    TResult Function(dynamic AuthFailure)? failure,
+    TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -358,7 +358,7 @@ class _$_Authenticated implements _Authenticated {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function() authenticated,
-    required TResult Function(dynamic AuthFailure) failure,
+    required TResult Function(AuthFailure failure) failure,
   }) {
     return authenticated();
   }
@@ -369,7 +369,7 @@ class _$_Authenticated implements _Authenticated {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? authenticated,
-    TResult Function(dynamic AuthFailure)? failure,
+    TResult Function(AuthFailure failure)? failure,
   }) {
     return authenticated?.call();
   }
@@ -380,7 +380,7 @@ class _$_Authenticated implements _Authenticated {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? authenticated,
-    TResult Function(dynamic AuthFailure)? failure,
+    TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -436,7 +436,9 @@ abstract class _$$_FailureCopyWith<$Res> {
   factory _$$_FailureCopyWith(
           _$_Failure value, $Res Function(_$_Failure) then) =
       __$$_FailureCopyWithImpl<$Res>;
-  $Res call({dynamic AuthFailure});
+  $Res call({AuthFailure failure});
+
+  $AuthFailureCopyWith<$Res> get failure;
 }
 
 /// @nodoc
@@ -450,25 +452,35 @@ class __$$_FailureCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? AuthFailure = freezed,
+    Object? failure = freezed,
   }) {
     return _then(_$_Failure(
-      AuthFailure == freezed ? _value.AuthFailure : AuthFailure,
+      failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as AuthFailure,
     ));
+  }
+
+  @override
+  $AuthFailureCopyWith<$Res> get failure {
+    return $AuthFailureCopyWith<$Res>(_value.failure, (value) {
+      return _then(_value.copyWith(failure: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_Failure implements _Failure {
-  const _$_Failure(this.AuthFailure);
+  const _$_Failure(this.failure);
 
   @override
-  final dynamic AuthFailure;
+  final AuthFailure failure;
 
   @override
   String toString() {
-    return 'AuthState.failure(AuthFailure: $AuthFailure)';
+    return 'AuthState.failure(failure: $failure)';
   }
 
   @override
@@ -476,13 +488,12 @@ class _$_Failure implements _Failure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Failure &&
-            const DeepCollectionEquality()
-                .equals(other.AuthFailure, AuthFailure));
+            const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(AuthFailure));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(failure));
 
   @JsonKey(ignore: true)
   @override
@@ -495,9 +506,9 @@ class _$_Failure implements _Failure {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function() authenticated,
-    required TResult Function(dynamic AuthFailure) failure,
+    required TResult Function(AuthFailure failure) failure,
   }) {
-    return failure(AuthFailure);
+    return failure(this.failure);
   }
 
   @override
@@ -506,9 +517,9 @@ class _$_Failure implements _Failure {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? authenticated,
-    TResult Function(dynamic AuthFailure)? failure,
+    TResult Function(AuthFailure failure)? failure,
   }) {
-    return failure?.call(AuthFailure);
+    return failure?.call(this.failure);
   }
 
   @override
@@ -517,11 +528,11 @@ class _$_Failure implements _Failure {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function()? authenticated,
-    TResult Function(dynamic AuthFailure)? failure,
+    TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
-      return failure(AuthFailure);
+      return failure(this.failure);
     }
     return orElse();
   }
@@ -565,9 +576,9 @@ class _$_Failure implements _Failure {
 }
 
 abstract class _Failure implements AuthState {
-  const factory _Failure(final dynamic AuthFailure) = _$_Failure;
+  const factory _Failure(final AuthFailure failure) = _$_Failure;
 
-  dynamic get AuthFailure => throw _privateConstructorUsedError;
+  AuthFailure get failure => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$_FailureCopyWith<_$_Failure> get copyWith =>
       throw _privateConstructorUsedError;
