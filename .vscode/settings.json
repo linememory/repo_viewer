@@ -8,7 +8,9 @@
         "**/Thumbs.db": true,
         "**/*freezed.dart": true,
         "**/*g.dart": true,
-        "**/.gitkeep": true
+        "**/.gitkeep": true,
+        "**/.idea": true,
+        "**/build": true
     },
     "explorerExclude.backup": null
 }
