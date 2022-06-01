@@ -1,2 +1,40 @@
-GET https://api.github.com/user/starred?page=1
-Authorization: bearer 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 
+@token =  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
+@acceptHeader = application/vnd.github.v3.html+json
+
+@baseUrl = https://api.github.com
+
+### get starred
+GET {{baseUrl}}/user/starred?page=1
+Authorization: bearer {{token}} 
+Accept: {{acceptHeader}}
+
+### search
+GET {{baseUrl}}/search/repositories
+    ?q=flutter
+    &page=1
+Authorization: bearer {{token}} 
+Accept: {{acceptHeader}}
+
+### get readme
+GET {{baseUrl}}/repos/flutter/flutter/readme
+Authorization: bearer {{token}} 
+Accept: {{acceptHeader}}
+
+### check if starred
+GET {{baseUrl}}/user/starred/rrousselGit/riverpod
+Authorization: bearer {{token}} 
+Accept: {{acceptHeader}}
+Content-Length: 0
+
+### star
+PUT {{baseUrl}}/user/starred/rrousselGit/riverpod
+Authorization: bearer {{token}} 
+Accept: {{acceptHeader}}
+Content-Length: 0
+
+### unstar
+DELETE {{baseUrl}}/user/starred/rrousselGit/riverpod
+Authorization: bearer {{token}} 
+Accept: {{acceptHeader}}
+Content-Length: 0
+
