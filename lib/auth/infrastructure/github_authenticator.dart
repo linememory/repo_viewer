@@ -93,7 +93,7 @@ class GithubAuthenticator {
         stringToBase64.encode('$clientId:$clientSecret');
     try {
       try {
-        _dio.deleteUri(
+        await _dio.deleteUri(
           revocationEndpoint,
           data: {'access_token': accessToken},
           options: Options(
@@ -104,6 +104,7 @@ class GithubAuthenticator {
         );
       } on DioError catch (e) {
         if (e.isNoConnectionError) {
+          // ignoring
         } else {
           rethrow;
         }
