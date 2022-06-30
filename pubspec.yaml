@@ -23,6 +23,9 @@ dependencies:
   json_annotation: ^4.5.0
   material_design_icons_flutter: ^5.0.6595
   oauth2: ^2.0.0
+  path: ^1.8.2
+  path_provider: ^2.0.11
+  sembast: ^3.2.0+1
   webview_flutter: ^3.0.4
 
 dev_dependencies:

@@ -12,5 +12,8 @@
         "**/.idea": true,
         "**/build": true
     },
-    "explorerExclude.backup": null
+    "explorerExclude.backup": null,
+    "cSpell.words": [
+        "Sembast"
+    ]
 }
