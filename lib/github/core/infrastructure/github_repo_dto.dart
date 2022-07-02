@@ -10,6 +10,7 @@ part 'github_repo_dto.g.dart';
 
 @freezed
 class GithubRepoDTO with _$GithubRepoDTO {
+  const GithubRepoDTO._();
   const factory GithubRepoDTO({
     required UserDTO owner,
     @JsonKey(name: 'name')
