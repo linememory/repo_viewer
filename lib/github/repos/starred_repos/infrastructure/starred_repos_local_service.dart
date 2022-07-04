@@ -14,7 +14,7 @@ class StarredReposLocalService {
     final sembastPage = page - 1;
     final keys = dtos
         .mapIndexed(
-          (index, _) => index + PaginationConfig.perPage * sembastPage,
+          (index, _) => index + PaginationConfig.itemsPerPage * sembastPage,
         )
         .toList();
     await _store
@@ -27,7 +27,10 @@ class StarredReposLocalService {
 
     final records = await _store.find(
       _sembastDatabase.instance,
-      finder: Finder(limit: PaginationConfig.perPage, offset: PaginationConfig.perPage * sembastPage),
+      finder: Finder(
+        limit: PaginationConfig.itemsPerPage,
+        offset: PaginationConfig.itemsPerPage * sembastPage,
+      ),
     );
     return records.map((e) => GithubRepoDTO.fromJson(e.value)).toList();
   }
