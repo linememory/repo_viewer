@@ -93,8 +93,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_User implements _User {
-  const _$_User({required this.name, required this.avatarUrl});
+class _$_User extends _User {
+  const _$_User({required this.name, required this.avatarUrl}) : super._();
 
   @override
   final String name;
@@ -127,9 +127,10 @@ class _$_User implements _User {
       __$$_UserCopyWithImpl<_$_User>(this, _$identity);
 }
 
-abstract class _User implements User {
+abstract class _User extends User {
   const factory _User(
       {required final String name, required final String avatarUrl}) = _$_User;
+  const _User._() : super._();
 
   @override
   String get name => throw _privateConstructorUsedError;
