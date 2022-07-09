@@ -164,10 +164,10 @@ abstract class _UserDTO extends UserDTO {
 
   @override
   @JsonKey(name: 'login')
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
   @JsonKey(name: 'avatar_url')
-  String get avatarUrl => throw _privateConstructorUsedError;
+  String get avatarUrl;
   @override
   @JsonKey(ignore: true)
   _$$_UserDTOCopyWith<_$_UserDTO> get copyWith =>

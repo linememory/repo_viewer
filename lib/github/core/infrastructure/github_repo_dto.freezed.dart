@@ -226,16 +226,16 @@ abstract class _GithubRepoDTO extends GithubRepoDTO {
       _$_GithubRepoDTO.fromJson;
 
   @override
-  UserDTO get owner => throw _privateConstructorUsedError;
+  UserDTO get owner;
   @override
   @JsonKey(name: 'name')
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
   @JsonKey(name: 'description', defaultValue: '')
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
   @JsonKey(name: 'stargazers_count')
-  int get stargazersCount => throw _privateConstructorUsedError;
+  int get stargazersCount;
   @override
   @JsonKey(ignore: true)
   _$$_GithubRepoDTOCopyWith<_$_GithubRepoDTO> get copyWith =>

@@ -153,11 +153,11 @@ abstract class _Fresh<T> implements Fresh<T> {
       final bool? isNextPageAvailable}) = _$_Fresh<T>;
 
   @override
-  T get entity => throw _privateConstructorUsedError;
+  T get entity;
   @override
-  bool get isFresh => throw _privateConstructorUsedError;
+  bool get isFresh;
   @override
-  bool? get isNextPageAvailable => throw _privateConstructorUsedError;
+  bool? get isNextPageAvailable;
   @override
   @JsonKey(ignore: true)
   _$$_FreshCopyWith<T, _$_Fresh<T>> get copyWith =>

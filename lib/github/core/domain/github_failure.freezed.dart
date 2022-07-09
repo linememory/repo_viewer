@@ -206,7 +206,7 @@ abstract class _Api implements GithubFailure {
   const factory _Api(final int? errorCode) = _$_Api;
 
   @override
-  int? get errorCode => throw _privateConstructorUsedError;
+  int? get errorCode;
   @override
   @JsonKey(ignore: true)
   _$$_ApiCopyWith<_$_Api> get copyWith => throw _privateConstructorUsedError;

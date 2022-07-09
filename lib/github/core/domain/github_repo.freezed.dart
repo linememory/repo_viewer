@@ -190,13 +190,13 @@ abstract class _GithubRepo extends GithubRepo {
   const _GithubRepo._() : super._();
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  User get owner => throw _privateConstructorUsedError;
+  User get owner;
   @override
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
-  int get stargazersCount => throw _privateConstructorUsedError;
+  int get stargazersCount;
   @override
   @JsonKey(ignore: true)
   _$$_GithubRepoCopyWith<_$_GithubRepo> get copyWith =>

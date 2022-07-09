@@ -326,7 +326,7 @@ abstract class _NotModified<T> extends RemoteResponse<T> {
   const factory _NotModified({required final int maxPage}) = _$_NotModified<T>;
   const _NotModified._() : super._();
 
-  int get maxPage => throw _privateConstructorUsedError;
+  int get maxPage;
   @JsonKey(ignore: true)
   _$$_NotModifiedCopyWith<T, _$_NotModified<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -478,8 +478,8 @@ abstract class _WithNewData<T> extends RemoteResponse<T> {
       _$_WithNewData<T>;
   const _WithNewData._() : super._();
 
-  T get data => throw _privateConstructorUsedError;
-  int get maxPage => throw _privateConstructorUsedError;
+  T get data;
+  int get maxPage;
   @JsonKey(ignore: true)
   _$$_WithNewDataCopyWith<T, _$_WithNewData<T>> get copyWith =>
       throw _privateConstructorUsedError;

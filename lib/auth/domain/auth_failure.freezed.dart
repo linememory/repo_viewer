@@ -197,7 +197,7 @@ class _$_Server implements _Server {
 abstract class _Server implements AuthFailure {
   const factory _Server([final String? message]) = _$_Server;
 
-  String? get message => throw _privateConstructorUsedError;
+  String? get message;
   @JsonKey(ignore: true)
   _$$_ServerCopyWith<_$_Server> get copyWith =>
       throw _privateConstructorUsedError;

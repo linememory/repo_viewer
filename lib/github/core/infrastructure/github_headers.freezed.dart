@@ -172,9 +172,9 @@ abstract class _GithubHeaders implements GithubHeaders {
       _$_GithubHeaders.fromJson;
 
   @override
-  String? get etag => throw _privateConstructorUsedError;
+  String? get etag;
   @override
-  PaginationLink? get link => throw _privateConstructorUsedError;
+  PaginationLink? get link;
   @override
   @JsonKey(ignore: true)
   _$$_GithubHeadersCopyWith<_$_GithubHeaders> get copyWith =>
@@ -307,7 +307,7 @@ abstract class _PaginationLink implements PaginationLink {
       _$_PaginationLink.fromJson;
 
   @override
-  int get maxPage => throw _privateConstructorUsedError;
+  int get maxPage;
   @override
   @JsonKey(ignore: true)
   _$$_PaginationLinkCopyWith<_$_PaginationLink> get copyWith =>

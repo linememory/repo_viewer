@@ -279,7 +279,7 @@ abstract class _Initial implements PaginatedReposState {
   const factory _Initial(final Fresh<List<GithubRepo>> repos) = _$_Initial;
 
   @override
-  Fresh<List<GithubRepo>> get repos => throw _privateConstructorUsedError;
+  Fresh<List<GithubRepo>> get repos;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>
@@ -456,8 +456,8 @@ abstract class _LoadInProgress implements PaginatedReposState {
       _$_LoadInProgress;
 
   @override
-  Fresh<List<GithubRepo>> get repos => throw _privateConstructorUsedError;
-  int get itemsPerPage => throw _privateConstructorUsedError;
+  Fresh<List<GithubRepo>> get repos;
+  int get itemsPerPage;
   @override
   @JsonKey(ignore: true)
   _$$_LoadInProgressCopyWith<_$_LoadInProgress> get copyWith =>
@@ -633,8 +633,8 @@ abstract class _LoadSuccess implements PaginatedReposState {
       {required final bool isNextPageAvailable}) = _$_LoadSuccess;
 
   @override
-  Fresh<List<GithubRepo>> get repos => throw _privateConstructorUsedError;
-  bool get isNextPageAvailable => throw _privateConstructorUsedError;
+  Fresh<List<GithubRepo>> get repos;
+  bool get isNextPageAvailable;
   @override
   @JsonKey(ignore: true)
   _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith =>
@@ -818,8 +818,8 @@ abstract class _LoadFailure implements PaginatedReposState {
       _$_LoadFailure;
 
   @override
-  Fresh<List<GithubRepo>> get repos => throw _privateConstructorUsedError;
-  GithubFailure get failure => throw _privateConstructorUsedError;
+  Fresh<List<GithubRepo>> get repos;
+  GithubFailure get failure;
   @override
   @JsonKey(ignore: true)
   _$$_LoadFailureCopyWith<_$_LoadFailure> get copyWith =>
