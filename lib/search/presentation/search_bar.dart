@@ -25,22 +25,47 @@ class SearchBar extends ConsumerStatefulWidget {
 }
 
 class _SearchBarState extends ConsumerState<SearchBar> {
+  late FloatingSearchBarController _controller;
   @override
   void initState() {
     super.initState();
+    _controller = FloatingSearchBarController();
     Future.microtask(
       () => ref.read(searchHistoryNotifierProvider.notifier).watchSearchTerms(),
     );
   }
 
+  void pushPageAndPutFirstInHistory(String searchTerm) {
+    _controller.close();
+    widget.onShouldNavigateToResultPage(searchTerm);
+    ref
+        .read(searchHistoryNotifierProvider.notifier)
+        .putSearchTermFirst(searchTerm);
+  }
+
+  void pushPageAndAddToHistory(String searchTerm) {
+    _controller.close();
+    widget.onShouldNavigateToResultPage(searchTerm);
+    ref.read(searchHistoryNotifierProvider.notifier).addTerm(searchTerm);
+  }
+
   @override
   Widget build(BuildContext context) {
     return FloatingSearchBar(
+      controller: _controller,
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            MdiIcons.logout,
+        FloatingSearchBarAction.searchToClear(
+          showIfClosed: false,
+        ),
+        FloatingSearchBarAction(
+          child: IconButton(
+            splashRadius: 18,
+            onPressed: () {
+              widget.onSignOutButtonPressed();
+            },
+            icon: const Icon(
+              MdiIcons.logout,
+            ),
           ),
         )
       ],
@@ -59,15 +84,102 @@ class _SearchBarState extends ConsumerState<SearchBar> {
         ],
       ),
       hint: widget.hint,
+      onSubmitted: (value) {
+        pushPageAndAddToHistory(value);
+      },
+      onQueryChanged: (query) {
+        ref
+            .read(searchHistoryNotifierProvider.notifier)
+            .watchSearchTerms(filter: query);
+      },
       body: FloatingSearchBarScrollNotifier(
         child: widget.body,
       ),
-      onSubmitted: (value) {
-        widget.onShouldNavigateToResultPage(value);
-      },
-      builder: (BuildContext context, Animation<double> transition) {
-        return Container();
+      builder: (context, transition) {
+        void pushPageAndPutFirstInHistory(String searchTerm) {
+          _controller.close();
+          widget.onShouldNavigateToResultPage(searchTerm);
+          ref
+              .read(searchHistoryNotifierProvider.notifier)
+              .putSearchTermFirst(searchTerm);
+        }
+
+        final searchHistoryState = ref.watch(searchHistoryNotifierProvider);
+        return Card(
+          clipBehavior: Clip.hardEdge,
+          elevation: 4,
+          child: searchHistoryState.map(
+            data: (history) {
+              if (_controller.query.isEmpty && history.value.isEmpty) {
+                return Container(
+                  alignment: Alignment.center,
+                  height: 56,
+                  child: Text(
+                    'Start searching',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                );
+              } else if (history.value.isEmpty) {
+                return ListTile(
+                  title: Text(
+                    _controller.query,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  trailing: const Icon(Icons.search),
+                  onTap: () {
+                    pushPageAndPutFirstInHistory(_controller.query);
+                  },
+                );
+              } else {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: history.value
+                      .map(
+                        (term) => ListTile(
+                          leading: const Icon(Icons.history),
+                          title: Text(
+                            term,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          trailing: IconButton(
+                            onPressed: () {
+                              ref
+                                  .read(searchHistoryNotifierProvider.notifier)
+                                  .deleteTerm(term);
+                            },
+                            icon: const Icon(Icons.clear),
+                          ),
+                          onTap: () {
+                            pushPageAndPutFirstInHistory(term);
+                          },
+                        ),
+                      )
+                      .toList(),
+                );
+              }
+            },
+            loading: (loading) {
+              return const ListTile(
+                title: LinearProgressIndicator(),
+              );
+            },
+            error: (error) {
+              // shouldn't occur
+              return ListTile(
+                title: Text('Unexpected error $error'),
+              );
+            },
+          ),
+        );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
