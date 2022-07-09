@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -35,24 +37,44 @@ class _SearchBarState extends ConsumerState<SearchBar> {
     );
   }
 
-  void pushPageAndPutFirstInHistory(String searchTerm) {
-    _controller.close();
-    widget.onShouldNavigateToResultPage(searchTerm);
-    ref
-        .read(searchHistoryNotifierProvider.notifier)
-        .putSearchTermFirst(searchTerm);
-  }
-
-  void pushPageAndAddToHistory(String searchTerm) {
-    _controller.close();
-    widget.onShouldNavigateToResultPage(searchTerm);
-    ref.read(searchHistoryNotifierProvider.notifier).addTerm(searchTerm);
-  }
-
   @override
   Widget build(BuildContext context) {
+    void pushPageAndPutFirstInHistory(String searchTerm) {
+      widget.onShouldNavigateToResultPage(searchTerm);
+      ref
+          .read(searchHistoryNotifierProvider.notifier)
+          .putSearchTermFirst(searchTerm);
+      _controller.close();
+    }
+
+    void pushPageAndAddToHistory(String searchTerm) {
+      widget.onShouldNavigateToResultPage(searchTerm);
+      ref.read(searchHistoryNotifierProvider.notifier).addTerm(searchTerm);
+      _controller.close();
+    }
+
     return FloatingSearchBar(
       controller: _controller,
+      automaticallyImplyBackButton: false,
+      leadingActions: [
+        if (AutoRouter.of(context).canPopSelfOrChildren &&
+            (Platform.isIOS || Platform.isMacOS))
+          IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            splashRadius: 18,
+            onPressed: () {
+              AutoRouter.of(context).pop();
+            },
+          )
+        else if (AutoRouter.of(context).canPopSelfOrChildren)
+          IconButton(
+            icon: const Icon(Icons.arrow_back),
+            splashRadius: 18,
+            onPressed: () {
+              AutoRouter.of(context).pop();
+            },
+          )
+      ],
       actions: [
         FloatingSearchBarAction.searchToClear(
           showIfClosed: false,
@@ -96,14 +118,6 @@ class _SearchBarState extends ConsumerState<SearchBar> {
         child: widget.body,
       ),
       builder: (context, transition) {
-        void pushPageAndPutFirstInHistory(String searchTerm) {
-          _controller.close();
-          widget.onShouldNavigateToResultPage(searchTerm);
-          ref
-              .read(searchHistoryNotifierProvider.notifier)
-              .putSearchTermFirst(searchTerm);
-        }
-
         final searchHistoryState = ref.watch(searchHistoryNotifierProvider);
         return Card(
           clipBehavior: Clip.hardEdge,
