@@ -6,7 +6,12 @@ class StarredReposNotifier extends PaginatedReposNotifier {
 
   StarredReposNotifier(this._repository);
 
+  Future<void> getFirstStarredReposPage() async {
+    super.resetState();
+    await getNextStarredReposPage();
+  }
+
   Future<void> getNextStarredReposPage() async {
-    getNextPage(_repository.getStarredReposPage);
+    super.getNextPage(_repository.getStarredReposPage);
   }
 }

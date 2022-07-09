@@ -17,6 +17,12 @@ class PaginatedReposNotifier extends StateNotifier<PaginatedReposState> {
   PaginatedReposNotifier() : super(PaginatedReposState.initial(Fresh.yes([])));
 
   @protected
+  void resetState() {
+    _page = 1;
+    state = PaginatedReposState.initial(Fresh.yes([]));
+  }
+
+  @protected
   Future<void> getNextPage(
     RepositoryGetter getter,
   ) async {
@@ -26,6 +32,7 @@ class PaginatedReposNotifier extends StateNotifier<PaginatedReposState> {
     );
 
     final failureOrRepos = await getter(_page);
+    if (!mounted) return;
     state = failureOrRepos.fold(
       (failure) => PaginatedReposState.loadFailure(state.repos, failure),
       (fresh) {
