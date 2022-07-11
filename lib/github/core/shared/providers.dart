@@ -106,7 +106,8 @@ final repoDetailRepositoryProvider = Provider<RepoDetailRepository>((ref) {
 });
 
 final repoDetailNotifierProvider =
-    StateNotifierProvider<RepoDetailNotifier, RepoDetailState>((ref) {
+    StateNotifierProvider.autoDispose<RepoDetailNotifier, RepoDetailState>(
+        (ref) {
   return RepoDetailNotifier(
     ref.watch(repoDetailRepositoryProvider),
   );
