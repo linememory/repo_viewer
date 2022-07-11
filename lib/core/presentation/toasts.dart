@@ -6,7 +6,8 @@ Future<void> showNoConnectionToast(String message, BuildContext context) async {
     duration: const Duration(seconds: 4),
     context: context,
     builder: (context, controller) {
-      return Flash.dialog(
+      return Flash.bar(
+        barrierColor: Colors.transparent,
         controller: controller,
         margin: const EdgeInsets.all(8),
         borderRadius: BorderRadius.circular(8),
