@@ -135,12 +135,15 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
               );
             } else {
               return WebView(
+                backgroundColor: Theme.of(context).backgroundColor,
                 navigationDelegate: (navigation) {
                   if (navigation.url.startsWith('data:')) {
                     return NavigationDecision.navigate;
                   } else {
-                    launchUrlString(navigation.url,
-                        mode: LaunchMode.inAppWebView);
+                    launchUrlString(
+                      navigation.url,
+                      mode: LaunchMode.inAppWebView,
+                    );
                     return NavigationDecision.prevent;
                   }
                 },
