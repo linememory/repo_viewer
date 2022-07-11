@@ -50,6 +50,15 @@ class AppWidget extends ConsumerWidget {
       title: 'Repo Viewer',
       routerDelegate: appRouter.delegate(),
       routeInformationParser: appRouter.defaultRouteParser(),
+      theme: _setUpThemeData(),
     );
   }
+}
+
+ThemeData _setUpThemeData() {
+  return ThemeData.light().copyWith(
+    primaryColor: Colors.grey.shade50,
+    appBarTheme: AppBarTheme(
+        color: Colors.grey.shade50, foregroundColor: Colors.black87),
+  );
 }
