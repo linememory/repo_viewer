@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_viewer/github/core/domain/github_repo.dart';
-import 'package:repo_viewer/github/detail/shared/providers.dart';
+import 'package:repo_viewer/github/core/shared/providers.dart';
 
 class RepoDetailPage extends ConsumerStatefulWidget {
   const RepoDetailPage({Key? key, required this.repo}) : super(key: key);
