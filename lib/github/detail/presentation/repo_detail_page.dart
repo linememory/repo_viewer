@@ -126,7 +126,8 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
         ),
         body: state.map(
           initial: (value) => Container(),
-          loadInProgress: (value) => const CircularProgressIndicator(),
+          loadInProgress: (value) =>
+              const Center(child: CircularProgressIndicator()),
           loadSuccess: (value) {
             if (value.repoDetail.entity == null) {
               return const NoResultsDisplay(
