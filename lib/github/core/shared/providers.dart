@@ -83,7 +83,6 @@ final searchedReposNotifierProvider = StateNotifierProvider.autoDispose<
   },
 );
 
-
 final repoDetailLocalServiceProvider = Provider<RepoDetailLocalService>((ref) {
   return RepoDetailLocalService(
     ref.watch(sembastProvider),
