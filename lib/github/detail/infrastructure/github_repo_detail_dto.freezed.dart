@@ -116,9 +116,10 @@ class __$$_GithubRepoDetailDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_GithubRepoDetailDTO implements _GithubRepoDetailDTO {
+class _$_GithubRepoDetailDTO extends _GithubRepoDetailDTO {
   const _$_GithubRepoDetailDTO(
-      {required this.fullName, required this.html, required this.starred});
+      {required this.fullName, required this.html, required this.starred})
+      : super._();
 
   factory _$_GithubRepoDetailDTO.fromJson(Map<String, dynamic> json) =>
       _$$_GithubRepoDetailDTOFromJson(json);
@@ -165,11 +166,12 @@ class _$_GithubRepoDetailDTO implements _GithubRepoDetailDTO {
   }
 }
 
-abstract class _GithubRepoDetailDTO implements GithubRepoDetailDTO {
+abstract class _GithubRepoDetailDTO extends GithubRepoDetailDTO {
   const factory _GithubRepoDetailDTO(
       {required final String fullName,
       required final String html,
       required final bool starred}) = _$_GithubRepoDetailDTO;
+  const _GithubRepoDetailDTO._() : super._();
 
   factory _GithubRepoDetailDTO.fromJson(Map<String, dynamic> json) =
       _$_GithubRepoDetailDTO.fromJson;
