@@ -59,7 +59,8 @@ class RepoDetailRepository {
 
   /// Returns 'right(null)' if there is no internet connection.
   Future<Either<GithubFailure, Unit?>> switchStarredStatus(
-      GithubRepoDetail repoDetail) async {
+    GithubRepoDetail repoDetail,
+  ) async {
     try {
       final actionCompleted = await _remoteService.switchStarredStatus(
         repoDetail.fullName,
