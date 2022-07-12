@@ -27,6 +27,7 @@ mixin _$GithubRepoDTO {
   String get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'stargazers_count')
   int get stargazersCount => throw _privateConstructorUsedError;
+  bool? get starred => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $GithubRepoDTOCopyWith<$Res> {
       {UserDTO owner,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'description', defaultValue: '') String description,
-      @JsonKey(name: 'stargazers_count') int stargazersCount});
+      @JsonKey(name: 'stargazers_count') int stargazersCount,
+      bool? starred});
 
   $UserDTOCopyWith<$Res> get owner;
 }
@@ -63,6 +65,7 @@ class _$GithubRepoDTOCopyWithImpl<$Res>
     Object? name = freezed,
     Object? description = freezed,
     Object? stargazersCount = freezed,
+    Object? starred = freezed,
   }) {
     return _then(_value.copyWith(
       owner: owner == freezed
@@ -81,6 +84,10 @@ class _$GithubRepoDTOCopyWithImpl<$Res>
           ? _value.stargazersCount
           : stargazersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      starred: starred == freezed
+          ? _value.starred
+          : starred // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 
@@ -103,7 +110,8 @@ abstract class _$$_GithubRepoDTOCopyWith<$Res>
       {UserDTO owner,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'description', defaultValue: '') String description,
-      @JsonKey(name: 'stargazers_count') int stargazersCount});
+      @JsonKey(name: 'stargazers_count') int stargazersCount,
+      bool? starred});
 
   @override
   $UserDTOCopyWith<$Res> get owner;
@@ -126,6 +134,7 @@ class __$$_GithubRepoDTOCopyWithImpl<$Res>
     Object? name = freezed,
     Object? description = freezed,
     Object? stargazersCount = freezed,
+    Object? starred = freezed,
   }) {
     return _then(_$_GithubRepoDTO(
       owner: owner == freezed
@@ -144,6 +153,10 @@ class __$$_GithubRepoDTOCopyWithImpl<$Res>
           ? _value.stargazersCount
           : stargazersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      starred: starred == freezed
+          ? _value.starred
+          : starred // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -155,7 +168,8 @@ class _$_GithubRepoDTO extends _GithubRepoDTO {
       {required this.owner,
       @JsonKey(name: 'name') required this.name,
       @JsonKey(name: 'description', defaultValue: '') required this.description,
-      @JsonKey(name: 'stargazers_count') required this.stargazersCount})
+      @JsonKey(name: 'stargazers_count') required this.stargazersCount,
+      required this.starred})
       : super._();
 
   factory _$_GithubRepoDTO.fromJson(Map<String, dynamic> json) =>
@@ -172,10 +186,12 @@ class _$_GithubRepoDTO extends _GithubRepoDTO {
   @override
   @JsonKey(name: 'stargazers_count')
   final int stargazersCount;
+  @override
+  final bool? starred;
 
   @override
   String toString() {
-    return 'GithubRepoDTO(owner: $owner, name: $name, description: $description, stargazersCount: $stargazersCount)';
+    return 'GithubRepoDTO(owner: $owner, name: $name, description: $description, stargazersCount: $stargazersCount, starred: $starred)';
   }
 
   @override
@@ -188,7 +204,8 @@ class _$_GithubRepoDTO extends _GithubRepoDTO {
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             const DeepCollectionEquality()
-                .equals(other.stargazersCount, stargazersCount));
+                .equals(other.stargazersCount, stargazersCount) &&
+            const DeepCollectionEquality().equals(other.starred, starred));
   }
 
   @JsonKey(ignore: true)
@@ -198,7 +215,8 @@ class _$_GithubRepoDTO extends _GithubRepoDTO {
       const DeepCollectionEquality().hash(owner),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(stargazersCount));
+      const DeepCollectionEquality().hash(stargazersCount),
+      const DeepCollectionEquality().hash(starred));
 
   @JsonKey(ignore: true)
   @override
@@ -219,7 +237,8 @@ abstract class _GithubRepoDTO extends GithubRepoDTO {
       @JsonKey(name: 'description', defaultValue: '')
           required final String description,
       @JsonKey(name: 'stargazers_count')
-          required final int stargazersCount}) = _$_GithubRepoDTO;
+          required final int stargazersCount,
+      required final bool? starred}) = _$_GithubRepoDTO;
   const _GithubRepoDTO._() : super._();
 
   factory _GithubRepoDTO.fromJson(Map<String, dynamic> json) =
@@ -236,6 +255,8 @@ abstract class _GithubRepoDTO extends GithubRepoDTO {
   @override
   @JsonKey(name: 'stargazers_count')
   int get stargazersCount;
+  @override
+  bool? get starred;
   @override
   @JsonKey(ignore: true)
   _$$_GithubRepoDTOCopyWith<_$_GithubRepoDTO> get copyWith =>

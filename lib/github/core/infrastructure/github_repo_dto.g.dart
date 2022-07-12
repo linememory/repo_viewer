@@ -12,6 +12,7 @@ _$_GithubRepoDTO _$$_GithubRepoDTOFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       description: json['description'] as String? ?? '',
       stargazersCount: json['stargazers_count'] as int,
+      starred: json['starred'] as bool?,
     );
 
 Map<String, dynamic> _$$_GithubRepoDTOToJson(_$_GithubRepoDTO instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$_GithubRepoDTOToJson(_$_GithubRepoDTO instance) =>
       'name': instance.name,
       'description': instance.description,
       'stargazers_count': instance.stargazersCount,
+      'starred': instance.starred,
     };

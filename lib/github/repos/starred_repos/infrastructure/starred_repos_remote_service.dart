@@ -20,9 +20,11 @@ class StarredReposRemoteService extends ReposRemoteService {
         'per_page': PaginationConfig.itemsPerPage.toString(),
       },
     );
-    return getPage(
+    final response = await getPage(
       requestUri: requestUri,
       jsonDataSelector: (json) => json as List<dynamic>,
     );
+
+    return response;
   }
 }

@@ -19,6 +19,7 @@ class GithubRepoDTO with _$GithubRepoDTO {
         required String description,
     @JsonKey(name: 'stargazers_count')
         required int stargazersCount,
+        required bool? starred,
   }) = _GithubRepoDTO;
 
   factory GithubRepoDTO.fromJson(Map<String, dynamic> json) =>
@@ -30,6 +31,7 @@ class GithubRepoDTO with _$GithubRepoDTO {
       name: repo.name,
       description: repo.description,
       stargazersCount: repo.stargazersCount,
+      starred: repo.starred,
     );
   }
 
@@ -39,6 +41,7 @@ class GithubRepoDTO with _$GithubRepoDTO {
       name: name,
       description: description,
       stargazersCount: stargazersCount,
+      starred: starred,
     );
   }
 }

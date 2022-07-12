@@ -1,6 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_viewer/core/shared/providers.dart';
+import 'package:repo_viewer/github/core/application/star_repo.dart';
 import 'package:repo_viewer/github/core/infrastructure/github_headers_cache.dart';
+import 'package:repo_viewer/github/core/infrastructure/repo_star_remote_service.dart';
 import 'package:repo_viewer/github/detail/application/repo_detail_notifier.dart';
 import 'package:repo_viewer/github/detail/infrastructure/repo_detail_local_service.dart';
 import 'package:repo_viewer/github/detail/infrastructure/repo_detail_remote_service.dart';
@@ -66,10 +68,17 @@ final searchedReposRemoteServiceProvider = Provider<SearchedReposRemoteService>(
   },
 );
 
+final repoStarRemoteServiceProvider = Provider<RepoStarRemoteService>((ref) {
+  return RepoStarRemoteService(
+    ref.watch(dioProvider),
+  );
+});
+
 final searchedReposRepositoryProvider = Provider<SearchedReposRepository>(
   (ref) {
     return SearchedReposRepository(
       ref.watch(searchedReposRemoteServiceProvider),
+      ref.watch(repoStarRemoteServiceProvider),
     );
   },
 );
@@ -110,5 +119,11 @@ final repoDetailNotifierProvider =
         (ref) {
   return RepoDetailNotifier(
     ref.watch(repoDetailRepositoryProvider),
+  );
+});
+
+final starRepoProvider = Provider<StarRepo>((ref) {
+  return StarRepo(
+    ref.watch(repoStarRemoteServiceProvider),
   );
 });

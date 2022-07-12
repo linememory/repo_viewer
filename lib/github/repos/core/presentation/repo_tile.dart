@@ -8,9 +8,11 @@ class RepoTile extends StatelessWidget {
   const RepoTile({
     Key? key,
     required this.repo,
+    this.onStarTab,
   }) : super(key: key);
 
   final GithubRepo repo;
+  final VoidCallback? onStarTab;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,17 @@ class RepoTile extends StatelessWidget {
       trailing: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.star_border),
+          IconButton(
+            visualDensity: VisualDensity.compact,
+            onPressed: onStarTab,
+            icon: (repo.starred == true)
+                ? const Icon(
+                    Icons.star,
+                  )
+                : const Icon(
+                    Icons.star_border,
+                  ),
+          ),
           Text(
             repo.stargazersCount.toString(),
             style: Theme.of(context).textTheme.caption,

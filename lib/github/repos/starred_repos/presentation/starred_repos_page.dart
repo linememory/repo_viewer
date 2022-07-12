@@ -50,6 +50,9 @@ class _StarredReposPageState extends ConsumerState<StarredReposPage> {
               .getNextStarredReposPage(),
           noResultsMessage:
               AppLocalizations.of(context)!.starredReposPageNoResults,
+          onSwitchStarred: () => ref
+              .read(starredReposNotifierProvider.notifier)
+              .getFirstStarredReposPage(),
         ),
       ),
     );

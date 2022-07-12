@@ -3,6 +3,7 @@ import 'package:repo_viewer/core/domain/fresh.dart';
 import 'package:repo_viewer/core/infrastructure/network_exceptions.dart';
 import 'package:repo_viewer/github/core/domain/github_failure.dart';
 import 'package:repo_viewer/github/core/domain/github_repo.dart';
+import 'package:repo_viewer/github/core/infrastructure/repo_star_remote_service.dart';
 import 'package:repo_viewer/github/repos/core/infrastructure/extensions.dart';
 import 'package:repo_viewer/github/repos/starred_repos/infrastructure/starred_repos_local_service.dart';
 import 'package:repo_viewer/github/repos/starred_repos/infrastructure/starred_repos_remote_service.dart';
@@ -32,10 +33,17 @@ class StarredReposRepository {
                 .then((value) => value.map((e) => e.toDomain()).toList()),
             isNextPageAvailable: page < maxPage,
           ),
-          withNewData: (data, maxPage) async {
-            _localService.upsertPage(data, page);
+          withNewData: (data, maxPage) {
+            final modifiedData = data
+                .map(
+                  (e) => e.copyWith(
+                    starred: true,
+                  ),
+                )
+                .toList();
+            _localService.upsertPage(modifiedData, page);
             return Fresh.yes(
-              data.toDomain(),
+              modifiedData.toDomain(),
               isNextPageAvailable: page < maxPage,
             );
           },

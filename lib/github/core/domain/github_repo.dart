@@ -10,6 +10,7 @@ class GithubRepo with _$GithubRepo {
     required User owner,
     required String description,
     required int stargazersCount,
+    bool? starred,
   }) = _GithubRepo;
 
   String get fullName => '${owner.name}/$name';

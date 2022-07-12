@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:repo_viewer/core/infrastructure/dio_extensions.dart';
 import 'package:repo_viewer/core/infrastructure/network_exceptions.dart';

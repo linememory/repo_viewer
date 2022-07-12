@@ -20,6 +20,7 @@ mixin _$GithubRepo {
   User get owner => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   int get stargazersCount => throw _privateConstructorUsedError;
+  bool? get starred => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GithubRepoCopyWith<GithubRepo> get copyWith =>
@@ -31,7 +32,12 @@ abstract class $GithubRepoCopyWith<$Res> {
   factory $GithubRepoCopyWith(
           GithubRepo value, $Res Function(GithubRepo) then) =
       _$GithubRepoCopyWithImpl<$Res>;
-  $Res call({String name, User owner, String description, int stargazersCount});
+  $Res call(
+      {String name,
+      User owner,
+      String description,
+      int stargazersCount,
+      bool? starred});
 
   $UserCopyWith<$Res> get owner;
 }
@@ -50,6 +56,7 @@ class _$GithubRepoCopyWithImpl<$Res> implements $GithubRepoCopyWith<$Res> {
     Object? owner = freezed,
     Object? description = freezed,
     Object? stargazersCount = freezed,
+    Object? starred = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -68,6 +75,10 @@ class _$GithubRepoCopyWithImpl<$Res> implements $GithubRepoCopyWith<$Res> {
           ? _value.stargazersCount
           : stargazersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      starred: starred == freezed
+          ? _value.starred
+          : starred // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 
@@ -86,7 +97,12 @@ abstract class _$$_GithubRepoCopyWith<$Res>
           _$_GithubRepo value, $Res Function(_$_GithubRepo) then) =
       __$$_GithubRepoCopyWithImpl<$Res>;
   @override
-  $Res call({String name, User owner, String description, int stargazersCount});
+  $Res call(
+      {String name,
+      User owner,
+      String description,
+      int stargazersCount,
+      bool? starred});
 
   @override
   $UserCopyWith<$Res> get owner;
@@ -108,6 +124,7 @@ class __$$_GithubRepoCopyWithImpl<$Res> extends _$GithubRepoCopyWithImpl<$Res>
     Object? owner = freezed,
     Object? description = freezed,
     Object? stargazersCount = freezed,
+    Object? starred = freezed,
   }) {
     return _then(_$_GithubRepo(
       name: name == freezed
@@ -126,6 +143,10 @@ class __$$_GithubRepoCopyWithImpl<$Res> extends _$GithubRepoCopyWithImpl<$Res>
           ? _value.stargazersCount
           : stargazersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      starred: starred == freezed
+          ? _value.starred
+          : starred // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -137,7 +158,8 @@ class _$_GithubRepo extends _GithubRepo {
       {required this.name,
       required this.owner,
       required this.description,
-      required this.stargazersCount})
+      required this.stargazersCount,
+      this.starred})
       : super._();
 
   @override
@@ -148,10 +170,12 @@ class _$_GithubRepo extends _GithubRepo {
   final String description;
   @override
   final int stargazersCount;
+  @override
+  final bool? starred;
 
   @override
   String toString() {
-    return 'GithubRepo(name: $name, owner: $owner, description: $description, stargazersCount: $stargazersCount)';
+    return 'GithubRepo(name: $name, owner: $owner, description: $description, stargazersCount: $stargazersCount, starred: $starred)';
   }
 
   @override
@@ -164,7 +188,8 @@ class _$_GithubRepo extends _GithubRepo {
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             const DeepCollectionEquality()
-                .equals(other.stargazersCount, stargazersCount));
+                .equals(other.stargazersCount, stargazersCount) &&
+            const DeepCollectionEquality().equals(other.starred, starred));
   }
 
   @override
@@ -173,7 +198,8 @@ class _$_GithubRepo extends _GithubRepo {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(owner),
       const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(stargazersCount));
+      const DeepCollectionEquality().hash(stargazersCount),
+      const DeepCollectionEquality().hash(starred));
 
   @JsonKey(ignore: true)
   @override
@@ -186,7 +212,8 @@ abstract class _GithubRepo extends GithubRepo {
       {required final String name,
       required final User owner,
       required final String description,
-      required final int stargazersCount}) = _$_GithubRepo;
+      required final int stargazersCount,
+      final bool? starred}) = _$_GithubRepo;
   const _GithubRepo._() : super._();
 
   @override
@@ -197,6 +224,8 @@ abstract class _GithubRepo extends GithubRepo {
   String get description;
   @override
   int get stargazersCount;
+  @override
+  bool? get starred;
   @override
   @JsonKey(ignore: true)
   _$$_GithubRepoCopyWith<_$_GithubRepo> get copyWith =>

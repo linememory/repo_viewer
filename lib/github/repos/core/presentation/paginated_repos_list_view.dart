@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:repo_viewer/core/presentation/toasts.dart';
 import 'package:repo_viewer/github/core/presentation/no_results_display.dart';
+import 'package:repo_viewer/github/core/shared/providers.dart';
 import 'package:repo_viewer/github/repos/core/application/paginated_repos_notifier.dart';
 import 'package:repo_viewer/github/repos/core/presentation/failure_repo_tile.dart';
 import 'package:repo_viewer/github/repos/core/presentation/loading_repo_tile.dart';
@@ -15,6 +16,7 @@ class PaginatedReposListView extends ConsumerStatefulWidget {
     required this.paginatedReposNotifier,
     required this.getNextPage,
     required this.noResultsMessage,
+    required this.onSwitchStarred,
   }) : super(key: key);
 
   final AutoDisposeStateNotifierProvider<PaginatedReposNotifier,
@@ -23,6 +25,7 @@ class PaginatedReposListView extends ConsumerStatefulWidget {
   final void Function(WidgetRef ref) getNextPage;
 
   final String noResultsMessage;
+  final VoidCallback onSwitchStarred;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -66,7 +69,10 @@ class _PaginatedReposListViewState
           ? NoResultsDisplay(
               message: widget.noResultsMessage,
             )
-          : _PaginatedListView(state: state),
+          : _PaginatedListView(
+              state: state,
+              onSwitchStarred: widget.onSwitchStarred,
+            ),
       onNotification: (notification) {
         final metrics = notification.metrics;
         final limit = metrics.maxScrollExtent - metrics.viewportDimension / 3;
@@ -80,16 +86,18 @@ class _PaginatedReposListViewState
   }
 }
 
-class _PaginatedListView extends StatelessWidget {
+class _PaginatedListView extends ConsumerWidget {
   const _PaginatedListView({
     Key? key,
     required this.state,
+    required this.onSwitchStarred,
   }) : super(key: key);
 
   final PaginatedReposState state;
+  final VoidCallback onSwitchStarred;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final fsb = FloatingSearchBar.of(context)?.widget;
     return ListView.builder(
       padding: fsb == null
@@ -118,9 +126,24 @@ class _PaginatedListView extends StatelessWidget {
               return const LoadingRepoTile();
             }
           },
-          loadSuccess: (value) => RepoTile(
-            repo: value.repos.entity[index],
-          ),
+          loadSuccess: (value) {
+            final repo = value.repos.entity[index];
+            return RepoTile(
+              repo: repo,
+              onStarTab: value.repos.isFresh
+                  ? () {
+                      ref.read(starRepoProvider).switchStarred(
+                            repo.fullName,
+                            isCurrentlyStarred: repo.starred ?? false,
+                          );
+                      onSwitchStarred();
+                      ref
+                          .read(starredReposNotifierProvider.notifier)
+                          .getFirstStarredReposPage();
+                    }
+                  : null,
+            );
+          },
           loadFailure: (value) {
             if (index < value.repos.entity.length) {
               return RepoTile(
