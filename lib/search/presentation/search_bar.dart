@@ -1,6 +1,8 @@
 import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
@@ -100,7 +102,7 @@ class _SearchBarState extends ConsumerState<SearchBar> {
             style: Theme.of(context).textTheme.headline6,
           ),
           Text(
-            'Tap to search 👆',
+            AppLocalizations.of(context)!.searchBarTapToSearch,
             style: Theme.of(context).textTheme.caption,
           ),
         ],
@@ -129,7 +131,7 @@ class _SearchBarState extends ConsumerState<SearchBar> {
                   alignment: Alignment.center,
                   height: 56,
                   child: Text(
-                    'Start searching',
+                    AppLocalizations.of(context)!.searchBarStartSearching,
                     style: Theme.of(context).textTheme.caption,
                   ),
                 );

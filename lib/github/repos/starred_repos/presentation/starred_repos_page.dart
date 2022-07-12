@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_viewer/auth/shared/providers.dart';
 import 'package:repo_viewer/core/presentation/routes/app_router.gr.dart';
@@ -34,8 +35,8 @@ class _StarredReposPageState extends ConsumerState<StarredReposPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SearchBar(
-        title: 'Starred repositories',
-        hint: 'Search all repositories',
+        title: AppLocalizations.of(context)!.starredReposPageTitle,
+        hint: AppLocalizations.of(context)!.starredReposPageSearchHint,
         onShouldNavigateToResultPage: (searchTerm) {
           AutoRouter.of(context)
               .push(SearchedReposRoute(searchedTerm: searchTerm));
@@ -48,7 +49,7 @@ class _StarredReposPageState extends ConsumerState<StarredReposPage> {
               .read(starredReposNotifierProvider.notifier)
               .getNextStarredReposPage(),
           noResultsMessage:
-              "Thats about everything we could find in your starred repos right now.",
+              AppLocalizations.of(context)!.starredReposPageNoResults,
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:repo_viewer/core/presentation/toasts.dart';
@@ -47,7 +48,7 @@ class _PaginatedReposListViewState
             if (!value.repos.isFresh && !hasAlreadyShownNoConnectionToast) {
               hasAlreadyShownNoConnectionToast = true;
               showNoConnectionToast(
-                "You are not online. Some information may be outdated.",
+                AppLocalizations.of(context)!.paginatedReposListOfflineMessage,
                 context,
               );
             }

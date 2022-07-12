@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_viewer/auth/application/auth_notifier.dart';
 import 'package:repo_viewer/auth/shared/providers.dart';
@@ -47,11 +48,13 @@ class AppWidget extends ConsumerWidget {
     });
 
     return MaterialApp.router(
-      title: 'Repo Viewer',
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       routerDelegate: appRouter.delegate(),
       routeInformationParser: appRouter.defaultRouteParser(),
       theme: _setUpThemeData(),
       darkTheme: _setUpDarkThemeData(),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

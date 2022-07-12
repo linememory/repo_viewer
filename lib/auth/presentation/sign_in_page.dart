@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:repo_viewer/auth/shared/providers.dart';
@@ -30,7 +31,7 @@ class SignInPage extends ConsumerWidget {
                     height: 16,
                   ),
                   Text(
-                    'Welcome to\n Repo Viewer',
+                    AppLocalizations.of(context)!.signInPageWelcomeMessage,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline3,
                   ),
@@ -60,7 +61,9 @@ class SignInPage extends ConsumerWidget {
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.green),
                     ),
-                    child: const Text('Sign In'),
+                    child: Text(
+                      AppLocalizations.of(context)!.signInPageSignInButton,
+                    ),
                   ),
                 ],
               ),

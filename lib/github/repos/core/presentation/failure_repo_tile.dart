@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_viewer/github/core/domain/github_failure.dart';
 import 'package:repo_viewer/github/repos/core/presentation/paginated_repos_list_view.dart';
@@ -26,12 +27,13 @@ class FailureRepoTile extends ConsumerWidget {
               Icons.warning,
             ),
           ),
-          title: const Text(
-            'An error occurred, please retry',
+          title: Text(
+            AppLocalizations.of(context)!.failureRepoTileErrorMessage,
           ),
           subtitle: Text(
             failure.map(
-              api: (value) => 'API returned ${failure.errorCode}',
+              api: (value) => AppLocalizations.of(context)!
+                  .failureRepoTileApiReturnedMessage(failure.errorCode ?? ''),
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
