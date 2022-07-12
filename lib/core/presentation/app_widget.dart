@@ -62,6 +62,7 @@ class AppWidget extends ConsumerWidget {
 ThemeData _setUpThemeData() {
   return ThemeData.light().copyWith(
     primaryColor: Colors.grey.shade50,
+    backgroundColor: Colors.grey.shade50,
     appBarTheme: AppBarTheme(
       color: Colors.grey.shade50,
       foregroundColor: Colors.black87,
