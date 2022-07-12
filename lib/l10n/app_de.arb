@@ -1,0 +1,27 @@
+{
+    "appTitle": "Repo Viewer",
+    "@appTitle": {
+        "description": "The title of the app"
+    },
+    "signInPageWelcomeMessage": "Willkommen im\n Repo Viewer",
+    "signInPageSignInButton": "Anmelden",
+    "starredReposPageTitle": "Starred Repositories",
+    "starredReposPageSearchHint": "Suche in allen Repositories",
+    "starredReposPageNoResults": "Das ist alles was wir in deinen Repositories finden konnten.",
+    "searchedReposPageSearchHint": "Suche in allen Repositories",
+    "searchedReposPageNoResults": "Das ist alles was wir für \"{searchTerm}\" finden konnten.",
+    "@searchedReposPageNoResults": {
+        "placeholders": {
+            "searchTerm": {}
+        }
+    },
+    "failureRepoTileErrorMessage": "Ein Fehler ist aufgetreten, bitte versuche es nochmal.",
+    "@failureRepoTileApiReturnedMessage": {
+        "placeholders": {
+            "errorCode": {}
+        }
+    },
+    "paginatedReposListOfflineMessage": "Du bist nicht online. Einige Informationen könnten nicht mehr aktuell sein.",
+    "searchBarTapToSearch": "Tap um zu suchen👆",
+    "searchBarStartSearching": "Starte eine Suche"
+}
