@@ -51,6 +51,7 @@ class AppWidget extends ConsumerWidget {
       routerDelegate: appRouter.delegate(),
       routeInformationParser: appRouter.defaultRouteParser(),
       theme: _setUpThemeData(),
+      darkTheme: _setUpDarkThemeData(),
     );
   }
 }
@@ -63,4 +64,8 @@ ThemeData _setUpThemeData() {
       foregroundColor: Colors.black87,
     ),
   );
+}
+
+ThemeData _setUpDarkThemeData() {
+  return ThemeData.dark().copyWith();
 }
