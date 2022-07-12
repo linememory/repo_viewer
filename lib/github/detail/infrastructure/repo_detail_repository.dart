@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:repo_viewer/core/domain/fresh.dart';
 import 'package:repo_viewer/core/infrastructure/network_exceptions.dart';
 import 'package:repo_viewer/github/core/domain/github_failure.dart';
-import 'package:repo_viewer/github/detail/domain/github_repo_detail.dart';
+import 'package:repo_viewer/github/core/domain/github_repo.dart';
 import 'package:repo_viewer/github/detail/infrastructure/github_repo_detail_dto.dart';
 import 'package:repo_viewer/github/detail/infrastructure/repo_detail_local_service.dart';
 import 'package:repo_viewer/github/detail/infrastructure/repo_detail_remote_service.dart';
@@ -13,60 +13,39 @@ class RepoDetailRepository {
 
   RepoDetailRepository(this._localService, this._remoteService);
 
-  Future<Either<GithubFailure, Fresh<GithubRepoDetail?>>> getRepoDetail(
-    String fullRepoName,
+  Future<Either<GithubFailure, Fresh<GithubRepo?>>> getRepoDetail(
+    GithubRepo repo,
   ) async {
     try {
       final htmlRemoteResponse =
-          await _remoteService.getReadmeHtml(fullRepoName);
+          await _remoteService.getReadmeHtml(repo.fullName);
       return right(
         await htmlRemoteResponse.when(
           noConnection: () async {
             return Fresh.no(
               await _localService
-                  .getRepoDetail(fullRepoName)
-                  .then((dto) => dto?.toDomain()),
+                  .getRepoDetail(repo.fullName)
+                  .then((dto) => repo.copyWith(readmeHtml: dto?.html)),
             );
           },
           notModified: (_) async {
-            final cached = await _localService.getRepoDetail(fullRepoName);
-            final starred = await _remoteService.getStarredStatus(fullRepoName);
-            final withUpdatedStarredField =
-                cached?.copyWith(starred: starred ?? false);
-            return Fresh.yes(
-              withUpdatedStarredField?.toDomain(),
-            );
+            final cached = await _localService.getRepoDetail(repo.fullName);
+
+            return Fresh.yes(repo.copyWith(readmeHtml: cached?.html));
           },
           withNewData: (
             html,
             _,
           ) async {
-            final starred = await _remoteService.getStarredStatus(fullRepoName);
             final dto = GithubRepoDetailDTO(
-              fullName: fullRepoName,
+              fullName: repo.fullName,
               html: html,
-              starred: starred ?? false,
             );
             await _localService.upsertRepoDetail(dto);
-            return Fresh.yes(dto.toDomain());
+            return Fresh.yes(repo.copyWith(readmeHtml: dto.html));
           },
         ),
       );
-    } on RestApiException catch (e) {
-      return left(GithubFailure.api(e.errorCode));
-    }
-  }
-
-  /// Returns 'right(null)' if there is no internet connection.
-  Future<Either<GithubFailure, Unit?>> switchStarredStatus(
-    GithubRepoDetail repoDetail,
-  ) async {
-    try {
-      final actionCompleted = await _remoteService.switchStarredStatus(
-        repoDetail.fullName,
-        isCurrentlyStarred: repoDetail.starred,
-      );
-      return right(actionCompleted);
     } on RestApiException catch (e) {
       return left(GithubFailure.api(e.errorCode));
     }

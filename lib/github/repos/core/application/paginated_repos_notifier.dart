@@ -16,7 +16,6 @@ class PaginatedReposNotifier extends StateNotifier<PaginatedReposState> {
 
   PaginatedReposNotifier() : super(PaginatedReposState.initial(Fresh.yes([])));
 
-  @protected
   void resetState() {
     _page = 1;
     state = PaginatedReposState.initial(Fresh.yes([]));
@@ -44,6 +43,11 @@ class PaginatedReposNotifier extends StateNotifier<PaginatedReposState> {
       },
     );
   }
+
+  Future<void> switchStarred(
+    String fullRepoName, {
+    required bool isCurrentlyStarred,
+  }) async {}
 }
 
 @freezed

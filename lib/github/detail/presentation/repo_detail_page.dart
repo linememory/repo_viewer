@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -30,7 +31,7 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
     Future.microtask(
       () => ref
           .read(repoDetailNotifierProvider.notifier)
-          .getRepoDetail(widget.repo.fullName),
+          .getRepoDetail(widget.repo),
     );
   }
 
@@ -87,6 +88,12 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
               ),
             ],
           ),
+          leading: IconButton(
+            onPressed: () {
+              AutoRouter.of(context).pop(widget.repo);
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
           actions: [
             state.maybeMap(
               loadSuccess: (state) {
@@ -129,7 +136,7 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
           loadInProgress: (value) =>
               const Center(child: CircularProgressIndicator()),
           loadSuccess: (value) {
-            if (value.repoDetail.entity == null) {
+            if (value.repoDetail.entity?.readmeHtml == null) {
               return const NoResultsDisplay(
                 message:
                     'These are approximately all the details we could find.',
@@ -161,7 +168,7 @@ class _RepoDetailPageState extends ConsumerState<RepoDetailPage> {
                     <link rel="stylesheet" href="style.css">
                   </head>
                   <body>
-                    ${value.repoDetail.entity!.html}
+                    ${value.repoDetail.entity?.readmeHtml}
                   </body>
 
                   </html>

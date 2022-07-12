@@ -10,6 +10,7 @@ class GithubRepo with _$GithubRepo {
     required User owner,
     required String description,
     required int stargazersCount,
+    String? readmeHtml,
     bool? starred,
   }) = _GithubRepo;
 

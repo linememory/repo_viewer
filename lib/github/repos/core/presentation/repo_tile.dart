@@ -1,7 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:repo_viewer/core/presentation/routes/app_router.gr.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:repo_viewer/github/core/domain/github_repo.dart';
 
 class RepoTile extends StatelessWidget {
@@ -9,10 +8,12 @@ class RepoTile extends StatelessWidget {
     Key? key,
     required this.repo,
     this.onStarTab,
+    required this.onTab,
   }) : super(key: key);
 
   final GithubRepo repo;
   final VoidCallback? onStarTab;
+  final VoidCallback onTab;
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +39,15 @@ class RepoTile extends StatelessWidget {
           IconButton(
             visualDensity: VisualDensity.compact,
             onPressed: onStarTab,
-            icon: (repo.starred == true)
-                ? const Icon(
-                    Icons.star,
-                  )
-                : const Icon(
-                    Icons.star_border,
-                  ),
+            icon: (onStarTab == null)
+                ? const Icon(MdiIcons.starRemoveOutline)
+                : (repo.starred == true)
+                    ? const Icon(
+                        Icons.star,
+                      )
+                    : const Icon(
+                        Icons.star_border,
+                      ),
           ),
           Text(
             repo.stargazersCount.toString(),
@@ -52,9 +55,7 @@ class RepoTile extends StatelessWidget {
           )
         ],
       ),
-      onTap: () {
-        AutoRouter.of(context).push(RepoDetailRoute(repo: repo));
-      },
+      onTap: onTab,
     );
   }
 }

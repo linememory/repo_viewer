@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:repo_viewer/github/detail/domain/github_repo_detail.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/timestamp.dart';
 
@@ -12,17 +11,10 @@ class GithubRepoDetailDTO with _$GithubRepoDetailDTO {
   const factory GithubRepoDetailDTO({
     required String fullName,
     required String html,
-    required bool starred,
   }) = _GithubRepoDetailDTO;
 
   factory GithubRepoDetailDTO.fromJson(Map<String, dynamic> json) =>
       _$GithubRepoDetailDTOFromJson(json);
-
-  GithubRepoDetail toDomain() => GithubRepoDetail(
-        fullName: fullName,
-        html: html,
-        starred: starred,
-      );
 
   static const lastUsedFieldName = 'lastUsed';
 

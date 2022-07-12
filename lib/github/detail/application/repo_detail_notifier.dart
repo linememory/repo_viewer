@@ -2,18 +2,21 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_viewer/core/domain/fresh.dart';
 import 'package:repo_viewer/github/core/domain/github_failure.dart';
-import 'package:repo_viewer/github/detail/domain/github_repo_detail.dart';
+import 'package:repo_viewer/github/core/domain/github_repo.dart';
+import 'package:repo_viewer/github/core/infrastructure/repo_star_repository.dart';
 import 'package:repo_viewer/github/detail/infrastructure/repo_detail_repository.dart';
 part 'repo_detail_notifier.freezed.dart';
 
 class RepoDetailNotifier extends StateNotifier<RepoDetailState> {
-  RepoDetailNotifier(this._repository) : super(const RepoDetailState.initial());
+  RepoDetailNotifier(this._repository, this._repoStarRepository)
+      : super(const RepoDetailState.initial());
 
   final RepoDetailRepository _repository;
+  final RepoStarRepository _repoStarRepository;
 
-  Future<void> getRepoDetail(String fullRepoName) async {
+  Future<void> getRepoDetail(GithubRepo repo) async {
     state = const RepoDetailState.loadInProgress();
-    final failureOrRepoDetail = await _repository.getRepoDetail(fullRepoName);
+    final failureOrRepoDetail = await _repository.getRepoDetail(repo);
     state = failureOrRepoDetail.fold(
       (l) => RepoDetailState.loadFailure(l),
       (r) => RepoDetailState.loadSuccess(r),
@@ -27,10 +30,12 @@ class RepoDetailNotifier extends StateNotifier<RepoDetailState> {
         final repoDetail = successState.repoDetail.entity;
         if (repoDetail != null) {
           state = successState.copyWith.repoDetail(
-            entity: repoDetail.copyWith(starred: !repoDetail.starred),
+            entity: repoDetail.copyWith(starred: !(repoDetail.starred == true)),
           );
           final failureOrSuccess =
-              await _repository.switchStarredStatus(repoDetail);
+              await _repoStarRepository.switchStarredStatus(
+            repoDetail,
+          );
           failureOrSuccess.fold(
             (l) => state = stateCopy,
             (r) => r == null
@@ -53,7 +58,7 @@ class RepoDetailState with _$RepoDetailState {
     @Default(false) bool hasStarredStatusChanged,
   }) = _LoadInProgress;
   const factory RepoDetailState.loadSuccess(
-    Fresh<GithubRepoDetail?> repoDetail, {
+    Fresh<GithubRepo?> repoDetail, {
     @Default(false) bool hasStarredStatusChanged,
   }) = _LoadSuccess;
   const factory RepoDetailState.loadFailure(

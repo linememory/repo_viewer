@@ -1,17 +1,12 @@
-import 'package:repo_viewer/github/core/infrastructure/repo_star_remote_service.dart';
+import 'package:repo_viewer/github/core/domain/github_repo.dart';
+import 'package:repo_viewer/github/core/infrastructure/repo_star_repository.dart';
 
 class StarRepo {
-  final RepoStarRemoteService _service;
+  final RepoStarRepository _repository;
 
-  StarRepo(this._service);
+  StarRepo(this._repository);
 
-  Future<void> switchStarred(
-    String fullRepoName, {
-    required bool isCurrentlyStarred,
-  }) async {
-    _service.switchStarredStatus(
-      fullRepoName,
-      isCurrentlyStarred: isCurrentlyStarred,
-    );
+  Future<void> switchStarred(GithubRepo repo) async {
+    _repository.switchStarredStatus(repo);
   }
 }

@@ -3,6 +3,7 @@ import 'package:repo_viewer/core/shared/providers.dart';
 import 'package:repo_viewer/github/core/application/star_repo.dart';
 import 'package:repo_viewer/github/core/infrastructure/github_headers_cache.dart';
 import 'package:repo_viewer/github/core/infrastructure/repo_star_remote_service.dart';
+import 'package:repo_viewer/github/core/infrastructure/repo_star_repository.dart';
 import 'package:repo_viewer/github/detail/application/repo_detail_notifier.dart';
 import 'package:repo_viewer/github/detail/infrastructure/repo_detail_local_service.dart';
 import 'package:repo_viewer/github/detail/infrastructure/repo_detail_remote_service.dart';
@@ -55,6 +56,7 @@ final starredReposNotifierProvider = StateNotifierProvider.autoDispose<
   (ref) {
     return StarredReposNotifier(
       ref.watch(starredReposRepositoryProvider),
+      ref.watch(repoStarRemoteServiceProvider),
     );
   },
 );
@@ -88,6 +90,7 @@ final searchedReposNotifierProvider = StateNotifierProvider.autoDispose<
   (ref) {
     return SearchedReposNotifier(
       ref.watch(searchedReposRepositoryProvider),
+      ref.watch(repoStarRemoteServiceProvider),
     );
   },
 );
@@ -119,11 +122,16 @@ final repoDetailNotifierProvider =
         (ref) {
   return RepoDetailNotifier(
     ref.watch(repoDetailRepositoryProvider),
+    ref.watch(repoStarRepositoryProvider),
   );
 });
 
 final starRepoProvider = Provider<StarRepo>((ref) {
   return StarRepo(
-    ref.watch(repoStarRemoteServiceProvider),
+    ref.watch(repoStarRepositoryProvider),
   );
+});
+
+final repoStarRepositoryProvider = Provider<RepoStarRepository>((ref) {
+  return RepoStarRepository(ref.watch(repoStarRemoteServiceProvider));
 });

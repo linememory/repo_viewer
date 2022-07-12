@@ -37,9 +37,10 @@ class _StarredReposPageState extends ConsumerState<StarredReposPage> {
       body: SearchBar(
         title: AppLocalizations.of(context)!.starredReposPageTitle,
         hint: AppLocalizations.of(context)!.starredReposPageSearchHint,
-        onShouldNavigateToResultPage: (searchTerm) {
-          AutoRouter.of(context)
+        onShouldNavigateToResultPage: (searchTerm) async {
+          await AutoRouter.of(context)
               .push(SearchedReposRoute(searchedTerm: searchTerm));
+          ref.read(starredReposNotifierProvider.notifier).reload();
         },
         onSignOutButtonPressed: () =>
             ref.read(authNotifierProvider.notifier).signOut(),
@@ -50,9 +51,8 @@ class _StarredReposPageState extends ConsumerState<StarredReposPage> {
               .getNextStarredReposPage(),
           noResultsMessage:
               AppLocalizations.of(context)!.starredReposPageNoResults,
-          onSwitchStarred: () => ref
-              .read(starredReposNotifierProvider.notifier)
-              .getFirstStarredReposPage(),
+          onRefresh: () =>
+              ref.read(starredReposNotifierProvider.notifier).reload(),
         ),
       ),
     );

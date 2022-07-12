@@ -11,7 +11,6 @@ _$_GithubRepoDetailDTO _$$_GithubRepoDetailDTOFromJson(
     _$_GithubRepoDetailDTO(
       fullName: json['fullName'] as String,
       html: json['html'] as String,
-      starred: json['starred'] as bool,
     );
 
 Map<String, dynamic> _$$_GithubRepoDetailDTOToJson(
@@ -19,5 +18,4 @@ Map<String, dynamic> _$$_GithubRepoDetailDTOToJson(
     <String, dynamic>{
       'fullName': instance.fullName,
       'html': instance.html,
-      'starred': instance.starred,
     };

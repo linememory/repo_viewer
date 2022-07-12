@@ -59,9 +59,9 @@ class _SearchedReposPageState extends ConsumerState<SearchedReposPage> {
               .getNextSearchedReposPage(widget.searchedTerm),
           noResultsMessage: AppLocalizations.of(context)!
               .searchedReposPageNoResults(widget.searchedTerm),
-          onSwitchStarred: () => ref
+          onRefresh: () => ref
               .read(searchedReposNotifierProvider.notifier)
-              .getFirstSearchedReposPage(widget.searchedTerm),
+              .reload(widget.searchedTerm),
         ),
       ),
     );

@@ -22,7 +22,7 @@ mixin _$RepoDetailState {
     required TResult Function(bool hasStarredStatusChanged) initial,
     required TResult Function(bool hasStarredStatusChanged) loadInProgress,
     required TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)
         loadSuccess,
     required TResult Function(
             GithubFailure failure, bool hasStarredStatusChanged)
@@ -34,7 +34,7 @@ mixin _$RepoDetailState {
     TResult Function(bool hasStarredStatusChanged)? initial,
     TResult Function(bool hasStarredStatusChanged)? loadInProgress,
     TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)?
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)?
         loadSuccess,
     TResult Function(GithubFailure failure, bool hasStarredStatusChanged)?
         loadFailure,
@@ -45,7 +45,7 @@ mixin _$RepoDetailState {
     TResult Function(bool hasStarredStatusChanged)? initial,
     TResult Function(bool hasStarredStatusChanged)? loadInProgress,
     TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)?
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)?
         loadSuccess,
     TResult Function(GithubFailure failure, bool hasStarredStatusChanged)?
         loadFailure,
@@ -183,7 +183,7 @@ class _$_Initial implements _Initial {
     required TResult Function(bool hasStarredStatusChanged) initial,
     required TResult Function(bool hasStarredStatusChanged) loadInProgress,
     required TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)
         loadSuccess,
     required TResult Function(
             GithubFailure failure, bool hasStarredStatusChanged)
@@ -198,7 +198,7 @@ class _$_Initial implements _Initial {
     TResult Function(bool hasStarredStatusChanged)? initial,
     TResult Function(bool hasStarredStatusChanged)? loadInProgress,
     TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)?
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)?
         loadSuccess,
     TResult Function(GithubFailure failure, bool hasStarredStatusChanged)?
         loadFailure,
@@ -212,7 +212,7 @@ class _$_Initial implements _Initial {
     TResult Function(bool hasStarredStatusChanged)? initial,
     TResult Function(bool hasStarredStatusChanged)? loadInProgress,
     TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)?
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)?
         loadSuccess,
     TResult Function(GithubFailure failure, bool hasStarredStatusChanged)?
         loadFailure,
@@ -345,7 +345,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     required TResult Function(bool hasStarredStatusChanged) initial,
     required TResult Function(bool hasStarredStatusChanged) loadInProgress,
     required TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)
         loadSuccess,
     required TResult Function(
             GithubFailure failure, bool hasStarredStatusChanged)
@@ -360,7 +360,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function(bool hasStarredStatusChanged)? initial,
     TResult Function(bool hasStarredStatusChanged)? loadInProgress,
     TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)?
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)?
         loadSuccess,
     TResult Function(GithubFailure failure, bool hasStarredStatusChanged)?
         loadFailure,
@@ -374,7 +374,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function(bool hasStarredStatusChanged)? initial,
     TResult Function(bool hasStarredStatusChanged)? loadInProgress,
     TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)?
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)?
         loadSuccess,
     TResult Function(GithubFailure failure, bool hasStarredStatusChanged)?
         loadFailure,
@@ -443,10 +443,9 @@ abstract class _$$_LoadSuccessCopyWith<$Res>
           _$_LoadSuccess value, $Res Function(_$_LoadSuccess) then) =
       __$$_LoadSuccessCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged});
+  $Res call({Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged});
 
-  $FreshCopyWith<GithubRepoDetail?, $Res> get repoDetail;
+  $FreshCopyWith<GithubRepo?, $Res> get repoDetail;
 }
 
 /// @nodoc
@@ -469,7 +468,7 @@ class __$$_LoadSuccessCopyWithImpl<$Res>
       repoDetail == freezed
           ? _value.repoDetail
           : repoDetail // ignore: cast_nullable_to_non_nullable
-              as Fresh<GithubRepoDetail?>,
+              as Fresh<GithubRepo?>,
       hasStarredStatusChanged: hasStarredStatusChanged == freezed
           ? _value.hasStarredStatusChanged
           : hasStarredStatusChanged // ignore: cast_nullable_to_non_nullable
@@ -478,8 +477,8 @@ class __$$_LoadSuccessCopyWithImpl<$Res>
   }
 
   @override
-  $FreshCopyWith<GithubRepoDetail?, $Res> get repoDetail {
-    return $FreshCopyWith<GithubRepoDetail?, $Res>(_value.repoDetail, (value) {
+  $FreshCopyWith<GithubRepo?, $Res> get repoDetail {
+    return $FreshCopyWith<GithubRepo?, $Res>(_value.repoDetail, (value) {
       return _then(_value.copyWith(repoDetail: value));
     });
   }
@@ -491,7 +490,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   const _$_LoadSuccess(this.repoDetail, {this.hasStarredStatusChanged = false});
 
   @override
-  final Fresh<GithubRepoDetail?> repoDetail;
+  final Fresh<GithubRepo?> repoDetail;
   @override
   @JsonKey()
   final bool hasStarredStatusChanged;
@@ -529,7 +528,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     required TResult Function(bool hasStarredStatusChanged) initial,
     required TResult Function(bool hasStarredStatusChanged) loadInProgress,
     required TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)
         loadSuccess,
     required TResult Function(
             GithubFailure failure, bool hasStarredStatusChanged)
@@ -544,7 +543,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     TResult Function(bool hasStarredStatusChanged)? initial,
     TResult Function(bool hasStarredStatusChanged)? loadInProgress,
     TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)?
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)?
         loadSuccess,
     TResult Function(GithubFailure failure, bool hasStarredStatusChanged)?
         loadFailure,
@@ -558,7 +557,7 @@ class _$_LoadSuccess implements _LoadSuccess {
     TResult Function(bool hasStarredStatusChanged)? initial,
     TResult Function(bool hasStarredStatusChanged)? loadInProgress,
     TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)?
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)?
         loadSuccess,
     TResult Function(GithubFailure failure, bool hasStarredStatusChanged)?
         loadFailure,
@@ -609,10 +608,10 @@ class _$_LoadSuccess implements _LoadSuccess {
 }
 
 abstract class _LoadSuccess implements RepoDetailState {
-  const factory _LoadSuccess(final Fresh<GithubRepoDetail?> repoDetail,
+  const factory _LoadSuccess(final Fresh<GithubRepo?> repoDetail,
       {final bool hasStarredStatusChanged}) = _$_LoadSuccess;
 
-  Fresh<GithubRepoDetail?> get repoDetail;
+  Fresh<GithubRepo?> get repoDetail;
   @override
   bool get hasStarredStatusChanged;
   @override
@@ -712,7 +711,7 @@ class _$_LoadFailure implements _LoadFailure {
     required TResult Function(bool hasStarredStatusChanged) initial,
     required TResult Function(bool hasStarredStatusChanged) loadInProgress,
     required TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)
         loadSuccess,
     required TResult Function(
             GithubFailure failure, bool hasStarredStatusChanged)
@@ -727,7 +726,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function(bool hasStarredStatusChanged)? initial,
     TResult Function(bool hasStarredStatusChanged)? loadInProgress,
     TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)?
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)?
         loadSuccess,
     TResult Function(GithubFailure failure, bool hasStarredStatusChanged)?
         loadFailure,
@@ -741,7 +740,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function(bool hasStarredStatusChanged)? initial,
     TResult Function(bool hasStarredStatusChanged)? loadInProgress,
     TResult Function(
-            Fresh<GithubRepoDetail?> repoDetail, bool hasStarredStatusChanged)?
+            Fresh<GithubRepo?> repoDetail, bool hasStarredStatusChanged)?
         loadSuccess,
     TResult Function(GithubFailure failure, bool hasStarredStatusChanged)?
         loadFailure,

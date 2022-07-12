@@ -20,6 +20,7 @@ mixin _$GithubRepo {
   User get owner => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   int get stargazersCount => throw _privateConstructorUsedError;
+  String? get readmeHtml => throw _privateConstructorUsedError;
   bool? get starred => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -37,6 +38,7 @@ abstract class $GithubRepoCopyWith<$Res> {
       User owner,
       String description,
       int stargazersCount,
+      String? readmeHtml,
       bool? starred});
 
   $UserCopyWith<$Res> get owner;
@@ -56,6 +58,7 @@ class _$GithubRepoCopyWithImpl<$Res> implements $GithubRepoCopyWith<$Res> {
     Object? owner = freezed,
     Object? description = freezed,
     Object? stargazersCount = freezed,
+    Object? readmeHtml = freezed,
     Object? starred = freezed,
   }) {
     return _then(_value.copyWith(
@@ -75,6 +78,10 @@ class _$GithubRepoCopyWithImpl<$Res> implements $GithubRepoCopyWith<$Res> {
           ? _value.stargazersCount
           : stargazersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      readmeHtml: readmeHtml == freezed
+          ? _value.readmeHtml
+          : readmeHtml // ignore: cast_nullable_to_non_nullable
+              as String?,
       starred: starred == freezed
           ? _value.starred
           : starred // ignore: cast_nullable_to_non_nullable
@@ -102,6 +109,7 @@ abstract class _$$_GithubRepoCopyWith<$Res>
       User owner,
       String description,
       int stargazersCount,
+      String? readmeHtml,
       bool? starred});
 
   @override
@@ -124,6 +132,7 @@ class __$$_GithubRepoCopyWithImpl<$Res> extends _$GithubRepoCopyWithImpl<$Res>
     Object? owner = freezed,
     Object? description = freezed,
     Object? stargazersCount = freezed,
+    Object? readmeHtml = freezed,
     Object? starred = freezed,
   }) {
     return _then(_$_GithubRepo(
@@ -143,6 +152,10 @@ class __$$_GithubRepoCopyWithImpl<$Res> extends _$GithubRepoCopyWithImpl<$Res>
           ? _value.stargazersCount
           : stargazersCount // ignore: cast_nullable_to_non_nullable
               as int,
+      readmeHtml: readmeHtml == freezed
+          ? _value.readmeHtml
+          : readmeHtml // ignore: cast_nullable_to_non_nullable
+              as String?,
       starred: starred == freezed
           ? _value.starred
           : starred // ignore: cast_nullable_to_non_nullable
@@ -159,6 +172,7 @@ class _$_GithubRepo extends _GithubRepo {
       required this.owner,
       required this.description,
       required this.stargazersCount,
+      this.readmeHtml,
       this.starred})
       : super._();
 
@@ -171,11 +185,13 @@ class _$_GithubRepo extends _GithubRepo {
   @override
   final int stargazersCount;
   @override
+  final String? readmeHtml;
+  @override
   final bool? starred;
 
   @override
   String toString() {
-    return 'GithubRepo(name: $name, owner: $owner, description: $description, stargazersCount: $stargazersCount, starred: $starred)';
+    return 'GithubRepo(name: $name, owner: $owner, description: $description, stargazersCount: $stargazersCount, readmeHtml: $readmeHtml, starred: $starred)';
   }
 
   @override
@@ -189,6 +205,8 @@ class _$_GithubRepo extends _GithubRepo {
                 .equals(other.description, description) &&
             const DeepCollectionEquality()
                 .equals(other.stargazersCount, stargazersCount) &&
+            const DeepCollectionEquality()
+                .equals(other.readmeHtml, readmeHtml) &&
             const DeepCollectionEquality().equals(other.starred, starred));
   }
 
@@ -199,6 +217,7 @@ class _$_GithubRepo extends _GithubRepo {
       const DeepCollectionEquality().hash(owner),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(stargazersCount),
+      const DeepCollectionEquality().hash(readmeHtml),
       const DeepCollectionEquality().hash(starred));
 
   @JsonKey(ignore: true)
@@ -213,6 +232,7 @@ abstract class _GithubRepo extends GithubRepo {
       required final User owner,
       required final String description,
       required final int stargazersCount,
+      final String? readmeHtml,
       final bool? starred}) = _$_GithubRepo;
   const _GithubRepo._() : super._();
 
@@ -224,6 +244,8 @@ abstract class _GithubRepo extends GithubRepo {
   String get description;
   @override
   int get stargazersCount;
+  @override
+  String? get readmeHtml;
   @override
   bool? get starred;
   @override
