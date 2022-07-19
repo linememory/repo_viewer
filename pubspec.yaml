@@ -6,18 +6,45 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.18.0-130.0.dev <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  cupertino_icons: ^1.0.2
+  auto_route: ^4.0.1
+  cached_network_image: ^3.2.1
+  collection: ^1.16.0
+  dartz: ^0.10.1
+  dio: ^4.0.6
+  flash: ^2.0.3+2
   flutter:
     sdk: flutter
+  flutter_hooks: ^0.18.4
+  flutter_localizations:
+    sdk: flutter
+  flutter_secure_storage: ^5.0.2
+  freezed_annotation: ^2.0.3
+  hooks_riverpod: ^1.0.4
+  http: ^0.13.4
+  intl: ^0.17.0
+  json_annotation: ^4.5.0
+  material_design_icons_flutter: ^5.0.6595
+  material_floating_search_bar: ^0.3.7
+  oauth2: ^2.0.0
+  path: ^1.8.2
+  path_provider: ^2.0.11
+  sembast: ^3.2.0+1
+  shimmer: ^2.0.0
+  url_launcher: ^6.1.4
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
+  auto_route_generator: ^4.0.0
+  build_runner: ^2.1.11
   flutter_test:
     sdk: flutter
+  freezed: ^2.0.3+1
+  json_serializable: ^6.2.0
+  lint: ^1.8.2
 
 flutter:
   uses-material-design: true
-
+  generate: true

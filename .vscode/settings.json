@@ -1,0 +1,21 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/*freezed.dart": true,
+        "**/*g.dart": true,
+        "**/.gitkeep": true,
+        "**/.idea": true,
+        "**/build": true
+    },
+    "explorerExclude.backup": null,
+    "cSpell.words": [
+        "etag",
+        "microtask",
+        "Sembast"
+    ]
+}
